@@ -1,0 +1,1019 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Archivara, Core Capabilities & Wider Innovation Impact</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+  /* Axiforma: if font files are hosted, they load first; Montserrat is the web fallback */
+  @font-face { font-family:'Axiforma'; src:local('Axiforma'), local('Axiforma-Regular'); font-weight:400; font-style:normal; }
+  @font-face { font-family:'Axiforma'; src:local('Axiforma Medium'), local('Axiforma-Medium'); font-weight:500; font-style:normal; }
+  @font-face { font-family:'Axiforma'; src:local('Axiforma SemiBold'), local('Axiforma-SemiBold'); font-weight:600; font-style:normal; }
+  @font-face { font-family:'Axiforma'; src:local('Axiforma Bold'), local('Axiforma-Bold'); font-weight:700; font-style:normal; }
+  @font-face { font-family:'Axiforma'; src:local('Axiforma ExtraBold'), local('Axiforma-ExtraBold'); font-weight:800; font-style:normal; }
+  @font-face { font-family:'Axiforma'; src:local('Axiforma Light Italic'), local('Axiforma-LightItalic'); font-weight:300; font-style:italic; }
+  @font-face { font-family:'Axiforma'; src:local('Axiforma Italic'), local('Axiforma-Italic'); font-weight:400; font-style:italic; }
+</style>
+<style>
+  :root {
+    --ink: #0a0a0f;
+    --paper: #f4f0e8;
+    --gold: #e89f5e;
+    --gold-dim: #a06535;
+    --gold-light: #f2bc8a;
+    --silver: #9ba8b5;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--ink); color: var(--paper); font-family: 'Axiforma','Montserrat',sans-serif; overflow-x: hidden; }
+
+  .progress-bar { position: fixed; top: 0; left: 0; height: 2px; background: var(--gold); z-index: 200; width: 0%; transition: width 0.1s; }
+
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; padding: 1.2rem 4vw; background: linear-gradient(to bottom, rgba(10,10,15,0.95), transparent); backdrop-filter: blur(8px); }
+  .nav-logo { font-family: 'Axiforma','Montserrat',sans-serif; font-weight: 800; font-size: 1.1rem; letter-spacing: 0.05em; color: var(--paper); text-decoration: none; }
+  .nav-logo span { color: var(--gold); }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a { font-family: 'Axiforma','Montserrat',sans-serif; font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--silver); text-decoration: none; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--gold); }
+  .nav-badge { font-family: 'Axiforma','Montserrat',sans-serif; font-size: 0.6rem; letter-spacing: 0.15em; color: var(--ink); background: var(--gold); padding: 0.25rem 0.65rem; text-transform: uppercase; }
+
+  /* HERO */
+  #hero { height: 100vh; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; }
+  #hero canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
+  .hero-content { position: relative; z-index: 2; text-align: center; padding: 2rem; }
+  .hero-eyebrow { font-family: 'Axiforma','Montserrat',sans-serif; font-size: 0.72rem; letter-spacing: 0.3em; color: var(--gold); text-transform: uppercase; margin-bottom: 1.5rem; opacity: 0; animation: fadeUp 1s 0.3s forwards; }
+  .hero-title { font-family: 'Axiforma','Montserrat',sans-serif; font-weight: 800; font-size: clamp(3.5rem, 8vw, 7rem); line-height: 0.95; letter-spacing: -0.03em; background: linear-gradient(135deg, var(--paper) 0%, var(--gold) 50%, var(--gold-light) 100%); background-size: 200% auto; -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; animation: fadeUp 1s 0.5s forwards, shimmer 4s 2s infinite; opacity: 0; }
+  .hero-sub { font-family: 'Axiforma','Montserrat',sans-serif; font-style: italic; font-size: clamp(1.1rem, 2vw, 1.4rem); color: var(--silver); margin-top: 1.5rem; opacity: 0; animation: fadeUp 1s 0.8s forwards; max-width: 540px; margin-left: auto; margin-right: auto; }
+  .hero-cta { margin-top: 3rem; opacity: 0; animation: fadeUp 1s 1.1s forwards; }
+  .btn-primary { font-family: 'Axiforma','Montserrat',sans-serif; font-size: 0.8rem; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: var(--ink); background: var(--gold); border: none; padding: 0.9rem 2.5rem; cursor: pointer; text-decoration: none; display: inline-block; transition: transform 0.2s, box-shadow 0.2s; }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(232,159,94,0.4); }
+  .scroll-hint { position: absolute; bottom: 2.5rem; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 0.5rem; opacity: 0; animation: fadeUp 1s 1.4s forwards; }
+  .scroll-hint span { font-family: 'Axiforma','Montserrat',sans-serif; font-size: 0.65rem; letter-spacing: 0.2em; color: var(--silver); opacity: 0.6; text-transform: uppercase; }
+  .scroll-line { width: 1px; height: 50px; background: linear-gradient(to bottom, var(--gold), transparent); animation: scrollPulse 2s infinite; }
+
+  /* EXEC */
+  #exec-section { padding: 10rem 5vw 10rem; max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; }
+  .exec-eyebrow { font-family: 'Axiforma','Montserrat',sans-serif; font-size: 0.65rem; letter-spacing: 0.35em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.2rem; }
+  .exec-left h2 { font-family: 'Axiforma','Montserrat',sans-serif; font-weight: 800; font-size: clamp(2rem, 3vw, 2.8rem); letter-spacing: -0.02em; line-height: 1.1; margin-bottom: 1.5rem; }
+  .exec-left p { font-size: 1.08rem; line-height: 1.85; color: var(--silver); }
+  .exec-left p + p { margin-top: 1rem; }
+  .three-pillars-graphic { display: flex; flex-direction: column; position: sticky; top: 4rem; }
+  .pillars-eyebrow { font-family: 'Axiforma','Montserrat',sans-serif; font-size: 0.62rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--silver); opacity: 0.6; margin-bottom: 1.5rem; }
+  .pillar-rect { position: relative; padding: 2rem 1.8rem 2rem 5.5rem; display: flex; flex-direction: column; gap: 0.6rem; border-left: 1px solid rgba(232,159,94,0.15); border-right: 1px solid rgba(232,159,94,0.15); border-top: 1px solid rgba(232,159,94,0.15); transition: background 0.4s; }
+  .pillar-rect:last-of-type { border-bottom: 1px solid rgba(232,159,94,0.15); }
+  .pillar-rect:hover { background: rgba(232,159,94,0.06) !important; }
+  .pillar-rect--1 { background: rgba(232,159,94,0.05); }
+  .pillar-rect--2 { background: rgba(232,159,94,0.025); }
+  .pillar-rect--3 { background: rgba(232,159,94,0.01); }
+  .pillar-rect-num { position: absolute; left: 1.5rem; top: 1.8rem; font-family: 'Axiforma','Montserrat',sans-serif; font-size: 0.65rem; color: var(--gold); opacity: 0.7; letter-spacing: 0.1em; }
+  .pillar-rect::before { content: ''; position: absolute; left: 0; top: 0; width: 3px; height: 100%; background: var(--gold); }
+  .pillar-rect--2::before { opacity: 0.7; }
+  .pillar-rect--3::before { opacity: 0.45; }
+  .pillar-rect-word { font-family: 'Axiforma','Montserrat',sans-serif; font-weight: 800; font-size: 1.6rem; letter-spacing: 0.04em; color: var(--paper); line-height: 1; }
+  .pillar-rect-desc { font-family: 'Axiforma','Montserrat',sans-serif; font-size: 0.95rem; line-height: 1.7; color: var(--silver); }
+  .flywheel-arrow { margin-top: 1rem; font-family: 'Axiforma','Montserrat',sans-serif; font-size: 0.6rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); opacity: 0.45; text-align: center; }
+
+  /* DEEP DIVE HEADER */
+  .deep-header { padding: 8rem 5vw 5rem; border-top: 1px solid rgba(232,159,94,0.12); }
+  .deep-header-inner { max-width: 1100px; margin: 0 auto; }
+  .deep-eyebrow { font-family: 'Axiforma','Montserrat',sans-serif; font-size: 0.65rem; letter-spacing: 0.35em; text-transform: uppercase; color: var(--gold); margin-bottom: 1rem; }
+  .deep-header h2 { font-family: 'Axiforma','Montserrat',sans-serif; font-weight: 800; font-size: clamp(2.2rem, 3.5vw, 3.4rem); letter-spacing: -0.03em; line-height: 1.05; margin-bottom: 1.5rem; }
+  .deep-header p { font-size: 1.08rem; line-height: 1.85; color: var(--silver); max-width: 720px; }
+
+  /* SPLIT LAYOUT */
+  .split-section { display: flex; min-height: 100vh; }
+  .split-left { width: 42%; position: sticky; top: 0; height: 100vh; display: flex; flex-direction: column; justify-content: center; padding: 4rem 3rem 4rem 5vw; overflow: hidden; }
+  .split-left::after { content: ''; position: absolute; right: 0; top: 10%; height: 80%; width: 1px; background: linear-gradient(to bottom, transparent, var(--gold-dim), transparent); }
+  .split-right { width: 58%; position: relative; }
+  .panel { height: 100vh; position: relative; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+  .panel canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
+  .panel-overlay { position: absolute; inset: 0; background: linear-gradient(to right, var(--ink) 0%, transparent 28%); pointer-events: none; }
+  .section-counter { font-family: 'Axiforma','Montserrat',sans-serif; font-size: 0.65rem; letter-spacing: 0.3em; color: var(--gold); text-transform: uppercase; margin-bottom: 1rem; }
+  .section-label { font-family: 'Axiforma','Montserrat',sans-serif; font-weight: 800; font-size: clamp(1.7rem, 2.5vw, 2.5rem); line-height: 1.08; letter-spacing: -0.02em; margin-bottom: 1.2rem; }
+  .section-body { font-family: 'Axiforma','Montserrat',sans-serif; font-size: 1.05rem; line-height: 1.8; color: var(--silver); max-width: 380px; }
+  .section-body strong { color: var(--gold); font-weight: 600; }
+  .section-tag { margin-top: 1.2rem; display: inline-block; font-family: 'Axiforma','Montserrat',sans-serif; font-size: 0.62rem; letter-spacing: 0.15em; padding: 0.35rem 0.9rem; border: 1px solid var(--gold-dim); color: var(--gold); text-transform: uppercase; }
+  .section-link { display: inline-block; margin-top: 1rem; font-family: 'Axiforma','Montserrat',sans-serif; font-size: 0.62rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); text-decoration: none; border-bottom: 1px solid rgba(232,159,94,0.3); padding-bottom: 1px; transition: border-color 0.2s, opacity 0.2s; opacity: 0.65; }
+  .section-link:hover { opacity: 1; border-color: var(--gold); }
+  .left-content { transition: opacity 0.4s ease, transform 0.4s ease; }
+  .left-content.transitioning { opacity: 0; transform: translateY(12px); }
+
+  /* SYNTHESIS */
+  .synthesis-section { padding: 7rem 5vw; border-top: 1px solid rgba(232,159,94,0.08); }
+  .synthesis-inner { max-width: 900px; margin: 0 auto; border: 1px solid rgba(232,159,94,0.2); padding: 3.5rem; background: rgba(232,159,94,0.03); }
+  .synthesis-eyebrow { font-family: 'Axiforma','Montserrat',sans-serif; font-weight: 700; font-size: 1.1rem; color: var(--gold); margin-bottom: 1.2rem; }
+  .synthesis-text { font-size: 1.08rem; line-height: 1.9; color: var(--silver); }
+
+  /* DEFENSIBILITY */
+  #defense-section { background: var(--paper); color: var(--ink); padding: 10rem 5vw; position: relative; overflow: hidden; }
+  #defense-section::before { content: 'ARCHIVARA'; position: absolute; font-family: 'Axiforma','Montserrat',sans-serif; font-weight: 800; font-size: 18vw; opacity: 0.04; top: 50%; left: 50%; transform: translate(-50%, -50%); white-space: nowrap; pointer-events: none; letter-spacing: -0.05em; }
+  .defense-inner { max-width: 800px; margin: 0 auto; position: relative; }
+  .defense-inner .eyebrow { font-family: 'Axiforma','Montserrat',sans-serif; font-size: 0.65rem; letter-spacing: 0.35em; text-transform: uppercase; color: var(--gold-dim); margin-bottom: 1.5rem; }
+  .defense-inner h2 { font-family: 'Axiforma','Montserrat',sans-serif; font-weight: 800; font-size: clamp(2.5rem, 4vw, 4rem); letter-spacing: -0.03em; line-height: 1; margin-bottom: 2rem; }
+  .defense-inner p { font-size: 1.2rem; line-height: 1.85; color: #444; max-width: 620px; }
+
+  /* CTA */
+  #cta-section { padding: 12rem 5vw; text-align: center; position: relative; overflow: hidden; }
+  #cta-section canvas { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0.4; }
+  .cta-inner { position: relative; z-index: 2; }
+  .cta-inner .eyebrow { font-family: 'Axiforma','Montserrat',sans-serif; font-size: 0.65rem; letter-spacing: 0.35em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.5rem; }
+  .cta-inner h2 { font-family: 'Axiforma','Montserrat',sans-serif; font-weight: 800; font-size: clamp(3rem, 6vw, 5.5rem); line-height: 0.95; letter-spacing: -0.04em; margin-bottom: 1.5rem; }
+  .cta-inner p { font-size: 1.1rem; color: var(--silver); max-width: 480px; margin: 0 auto 3rem; line-height: 1.7; }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes shimmer { 0%, 100% { background-position: 0% center; } 50% { background-position: 100% center; } }
+  @keyframes scrollPulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+  .fade-in-up { opacity: 0; transform: translateY(40px); transition: opacity 0.8s ease, transform 0.8s ease; }
+  .fade-in-up.visible { opacity: 1; transform: translateY(0); }
+</style>
+</head>
+<body>
+
+<div class="progress-bar" id="progressBar"></div>
+
+<nav>
+  <a href="#" class="nav-logo">ARCHI<span>VARA</span></a>
+  <ul class="nav-links">
+    <li><a href="#algo-header">Pillars</a></li>
+    <li><a href="#defense-section">Moat</a></li>
+    <li><a href="#cta-section">Access</a></li>
+  </ul>
+  <span class="nav-badge">YC '26</span>
+</nav>
+
+<!-- ─── HERO ─────────────────────────────────── -->
+<section id="hero">
+  <canvas id="heroCanvas"></canvas>
+  <div class="hero-content">
+    <p class="hero-eyebrow">Technical Memorandum, Core Capabilities</p>
+    <h1 class="hero-title">ARCHIVARA</h1>
+    <p class="hero-sub">A compounding, dual-engine ecosystem combining a proprietary scientific archive with an advanced autonomous AI agent.</p>
+    <div class="hero-cta"><a href="#exec-section" class="btn-primary">Explore the Five Pillars</a></div>
+  </div>
+  <div class="scroll-hint"><span>Scroll</span><div class="scroll-line"></div></div>
+</section>
+
+<!-- ─── EXEC SUMMARY ─────────────────────────── -->
+<section id="exec-section">
+  <div class="exec-left fade-in-up">
+    <p class="exec-eyebrow">Executive Summary</p>
+    <h2>Two engines.<br>One compounding<br>moat.</h2>
+    <p>Archivara is not a single software tool. It is a dual-engine ecosystem engineered to accelerate the full lifecycle of scientific discovery. The first engine is a proprietary scientific archive: a structured, metadata-rich repository where AI-generated papers, models, code, and datasets live with full reproducibility information, citation graphs, and semantic search. The second engine is an advanced autonomous AI agent capable of running agentic research workflows, improving existing research, generating novel proofs, and shipping verifiable results across mathematics, physics, and computational science.</p>
+    <p>Together, these two engines form a virtuous loop: every paper added to the archive enriches the agent's context, every agent discovery strengthens the archive, and every verified result expands the platform's scientific credibility. Unlike static pre-print servers or isolated LLM wrappers, Archivara is the only platform where the archive and the agent compound each other's value, creating a technical and data moat that widens with every interaction.</p>
+    <p>The results in our archive have been produced by our agent and verified by the Archivara team. They represent genuine, peer-reviewable advances in open mathematical and scientific problems, demonstrating the platform's real-world capability to accelerate innovation, not merely to assist it.</p>
+  </div>
+  <div class="exec-right fade-in-up">
+    <div class="three-pillars-graphic">
+      <p class="pillars-eyebrow">The Archivara Flywheel</p>
+      <div class="pillar-rect pillar-rect--1">
+        <span class="pillar-rect-num">01</span>
+        <span class="pillar-rect-word">PUBLISH</span>
+        <span class="pillar-rect-desc">Researchers and agents submit verified papers, models, and datasets to the proprietary archive. Every result is stored with full reproducibility metadata, citation graphs, and semantic embeddings, creating a growing corpus that no competitor can replicate.</span>
+      </div>
+      <div class="pillar-rect pillar-rect--2">
+        <span class="pillar-rect-num">02</span>
+        <span class="pillar-rect-word">INNOVATE</span>
+        <span class="pillar-rect-desc">The autonomous AI agent reads, connects, and builds upon archived work. It proposes hypotheses, constructs proofs, runs code in isolated cloud VMs, verifies results, and writes new papers, autonomously expanding the frontier of knowledge.</span>
+      </div>
+      <div class="pillar-rect pillar-rect--3">
+        <span class="pillar-rect-num">03</span>
+        <span class="pillar-rect-word">DEVELOP</span>
+        <span class="pillar-rect-desc">Validated discoveries are packaged into enterprise-ready tools, algorithms, and APIs. Organizations can license Archivara's breakthroughs, integrate the agent into R&amp;D workflows, or deploy custom scientific software, turning novel IP directly into business value.</span>
+      </div>
+      <div class="flywheel-arrow">each step feeds the next</div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── PILLAR I HEADER ───────────────────────── -->
+<div class="deep-header" id="algo-header" style="background:#0c0c13;">
+  <div class="deep-header-inner fade-in-up">
+    <p class="deep-eyebrow">Pillar I, Algorithmic Optimization</p>
+    <h2>A Generalizable<br>Optimization Intelligence</h2>
+    <p>The single most important capability of an AI agent built for science is the ability to find solutions to hard optimization problems that have resisted human effort for years, and to do so not once, but repeatedly, across entirely different mathematical domains. Archivara's agent has demonstrated this capability across three distinct, independently verified problems, establishing a pattern of generalized optimization intelligence that goes far beyond memorization or pattern-matching.</p>
+  </div>
+</div>
+
+<!-- ─── PILLAR I SPLIT ────────────────────────── -->
+<div class="split-section" id="algo-split" style="background:#0c0c13;">
+  <div class="split-left">
+    <div class="left-content" id="algoLeft">
+      <div class="section-counter" id="algoCounter">Problem 01 / 03</div>
+      <h2 class="section-label" id="algoLabel">The 16x16 Matrix Breakthrough</h2>
+      <p class="section-body" id="algoBody">Matrix multiplication is the <strong>computational primitive</strong> underpinning all of modern AI. Every transformer attention head and every neural network forward pass reduces to matrix multiplication. Archivara's agent discovered a fundamentally <strong>new algebraic structure</strong> that reduces the number of scalar multiplications required to multiply two 16x16 matrices, by exploiting a previously unknown tensor decomposition of the bilinear map. This structure does not follow from existing Strassen-style recursion or known rank decompositions. It maps directly onto GPU tensor core tile sizes for immediate hardware-level impact, and because it exposes a generalizable algebraic pattern, it is recursively applicable to larger matrix dimensions, making it a foundational result rather than an isolated trick.</p>
+      <span class="section-tag" id="algoTag">GPU-Native Optimization</span><br>
+      <a href="https://archivara.org/browse" target="_blank" class="section-link" id="algoLink">View paper on archivara.org &rarr;</a>
+    </div>
+  </div>
+  <div class="split-right">
+    <div class="panel" data-group="algo" data-index="0"><canvas id="algoC0"></canvas><div class="panel-overlay"></div></div>
+    <div class="panel" data-group="algo" data-index="1"><canvas id="algoC1"></canvas><div class="panel-overlay"></div></div>
+    <div class="panel" data-group="algo" data-index="2"><canvas id="algoC2"></canvas><div class="panel-overlay"></div></div>
+  </div>
+</div>
+
+<!-- ─── PILLAR I SYNTHESIS ───────────────────── -->
+<div class="synthesis-section" style="background:#0c0c13;">
+  <div class="synthesis-inner fade-in-up">
+    <p class="synthesis-eyebrow">Why Three Problems Matter More Than One</p>
+    <p class="synthesis-text">Three optimization problems. Three entirely different mathematical domains, algebraic decomposition, number theory over cyclic rings, and combinatorial geometry. Three genuinely verified improvements on previously standing records or benchmarks. This is not a demonstration that Archivara's agent can solve a single type of problem. It is evidence that the agent possesses a generalized optimization intelligence deployable across any domain where a problem can be formulated as a search over a structured space. For enterprise R&D teams, this means a single platform that can tackle optimization challenges whether they arise in hardware-level algorithm design, signal processing, geometric planning, or entirely new domains yet to be explored.</p>
+  </div>
+</div>
+
+<!-- ─── PILLAR II HEADER ──────────────────────── -->
+<div class="deep-header" id="erdos-header" style="background:#09090f;">
+  <div class="deep-header-inner fade-in-up">
+    <p class="deep-eyebrow">Pillar II, Abstract Reasoning</p>
+    <h2>Solving Erdos 897:<br>Original Abstract Thought at Machine Speed</h2>
+    <p>If optimization intelligence is about finding better solutions within known structures, abstract reasoning is about constructing entirely new chains of thought in uncharted territory. Archivara's agent demonstrated this second, rarer capability through its resolution of Erdos Problem 897, an open problem in combinatorial mathematics that required not computation, but genuine conceptual originality.</p>
+  </div>
+</div>
+
+<!-- ─── PILLAR II SPLIT ───────────────────────── -->
+<div class="split-section" id="erdosSection" style="background:#09090f;">
+  <div class="split-left">
+    <div class="left-content" id="erdosLeft">
+      <div class="section-counter" id="erdosCounter">Pillar II, Context</div>
+      <h2 class="section-label" id="erdosLabel">The Challenge of Abstract Reasoning</h2>
+      <p class="section-body" id="erdosBody">Optimization solves problems within known structures. Abstract reasoning requires constructing entirely new chains of thought in uncharted territory. This is the distinction Terence Tao identified in November 2025 when he asked whether AI systems capable in lower-level combinatorics could achieve comparable results in fields requiring <strong>"forbidding levels of abstraction."</strong> Erdos Problem 897 sits precisely in that territory.</p>
+      <span class="section-tag" id="erdosTag">Abstract Mathematics</span><br>
+      <a href="https://archivara.org/browse" target="_blank" class="section-link" id="erdosLink">View paper on archivara.org &rarr;</a>
+    </div>
+  </div>
+  <div class="split-right">
+    <div class="panel" data-group="erdos" data-index="0"><canvas id="erdosC0"></canvas><div class="panel-overlay" style="background:linear-gradient(to right,#09090f 0%,transparent 28%);"></div></div>
+    <div class="panel" data-group="erdos" data-index="1"><canvas id="erdosC1"></canvas><div class="panel-overlay" style="background:linear-gradient(to right,#09090f 0%,transparent 28%);"></div></div>
+    <div class="panel" data-group="erdos" data-index="2"><canvas id="erdosC2"></canvas><div class="panel-overlay" style="background:linear-gradient(to right,#09090f 0%,transparent 28%);"></div></div>
+  </div>
+</div>
+
+<!-- ─── PILLAR II SYNTHESIS ──────────────────── -->
+<div class="synthesis-section" style="background:#09090f;">
+  <div class="synthesis-inner fade-in-up">
+    <p class="synthesis-eyebrow">The Abstract Reasoning Challenge</p>
+    <p class="synthesis-text">In November 2025, Fields Medalist Terence Tao, working with Google DeepMind on mathematical AI problems, posed the key open question: can AI systems that perform well in lower-level combinatorics achieve comparable results in domains requiring "forbidding levels of abstraction"? He identified unsolved problems as a "long-tail distribution" where AI, deployed at scale, could systematically contribute, but only if it were capable of genuine conceptual leaps and not merely exhaustive search. Archivara's Erdos 897 result is a direct answer to that challenge: an original chain of thought, independently constructed, demonstrating that Archivara's agent operates precisely at the abstract reasoning frontier Tao identified. For researchers, this means a co-investigator capable of tackling problems where existing literature offers no direct foothold. For enterprises, it means reasoning infrastructure that generalizes to any domain where expert human capacity is scarce.</p>
+  </div>
+</div>
+
+<!-- ─── PILLAR III HEADER ─────────────────────── -->
+<div class="deep-header" style="background:#0a0a0f;">
+  <div class="deep-header-inner fade-in-up">
+    <p class="deep-eyebrow">Pillar III, Compounding Research Enhancement</p>
+    <h2>When One Paper<br>Becomes Four Discoveries</h2>
+    <p>Perhaps the most commercially significant capability of the Archivara platform is not what the agent discovers alone, but what it discovers from seeds that researchers did not know were seeds. When original research is uploaded to the archive, the agent reads it not as a static document but as a departure point, identifying implications, generalizations, and connections that the original author had not yet explored. This compounding effect has been demonstrated in concrete, verifiable form.</p>
+  </div>
+</div>
+
+<!-- ─── PILLAR III SPLIT ──────────────────────── -->
+<div class="split-section" style="background:#0a0a0f;">
+  <div class="split-left">
+    <div class="left-content" id="radoLeft">
+      <div class="section-counter" id="radoCounter">Pillar III, Seed Paper</div>
+      <h2 class="section-label" id="radoLabel">A Researcher Uploads New Work</h2>
+      <p class="section-body" id="radoBody">Alejandro Zarzuelo Urdiales, a member of the Archivara team, uploaded a new, previously unpublished paper in graph theory to test a core platform use case: what happens when a scientist deposits genuinely <strong>original, unreviewed research</strong> into the archive? The paper introduced new structural results connecting several classes of graphs through a specific embedding construction. It had never been published, never been cited, and its downstream implications were entirely unexplored. That is the most common situation researchers actually face.</p>
+      <span class="section-tag" id="radoTag">Original Research Uploaded</span><br>
+      <a href="https://archivara.org/browse" target="_blank" class="section-link" id="radoLink">View original paper on archivara.org &rarr;</a>
+    </div>
+  </div>
+  <div class="split-right">
+    <div class="panel" data-group="rado" data-index="0"><canvas id="radoC0"></canvas><div class="panel-overlay" style="background:linear-gradient(to right,#0a0a0f 0%,transparent 28%);"></div></div>
+    <div class="panel" data-group="rado" data-index="1"><canvas id="radoC1"></canvas><div class="panel-overlay" style="background:linear-gradient(to right,#0a0a0f 0%,transparent 28%);"></div></div>
+    <div class="panel" data-group="rado" data-index="2"><canvas id="radoC2"></canvas><div class="panel-overlay" style="background:linear-gradient(to right,#0a0a0f 0%,transparent 28%);"></div></div>
+  </div>
+</div>
+
+<!-- ─── PILLAR III SYNTHESIS ─────────────────── -->
+<div class="synthesis-section" style="background:#0a0a0f;">
+  <div class="synthesis-inner fade-in-up">
+    <p class="synthesis-eyebrow">The Compounding Effect: Why This Changes the Incentive to Publish</p>
+    <p class="synthesis-text">None of these three results were in the original paper. They were not known to the author prior to the agent's analysis. They emerged because Archivara's agent read the embedding results, identified the structural properties they implied, and independently pursued three distinct mathematical threads that the original work had opened without knowing it. This is the compounding effect at its most commercially important: a researcher publishes one result and receives three back. For scientists, this transforms publication from a one-way broadcast into a dialogue with an agent that understands the implications of their work more broadly than any single human reviewer could. For enterprises with active R&D pipelines, every piece of internal research uploaded to Archivara becomes a seed for further discovery, multiplying the return on every investment in original research. For the platform itself, every new paper strengthens the agent's ability to find connections, widening the moat with each contribution and creating a powerful, self-reinforcing incentive for scientists and enterprises to keep their research active within the Archivara ecosystem.</p>
+  </div>
+</div>
+
+<!-- ─── PILLAR IV HEADER ───────────────────────── -->
+<div class="deep-header" style="background:#0c0c13;">
+  <div class="deep-header-inner fade-in-up">
+    <p class="deep-eyebrow">Pillar IV, Physics Discovery</p>
+    <h2>Beyond Mathematics:<br>Discovering Physical Laws</h2>
+    <p>Archivara's most recent published paper marks a decisive departure from the landscape of AI math tools: the agent trained a physics model directly from observational trajectory data and extracted the underlying governing equations in closed symbolic form. This is not problem-solving within mathematics. This is empirical science, the machine equivalent of Kepler deriving his laws from Tycho Brahe's planetary tables.</p>
+  </div>
+</div>
+
+<!-- ─── PILLAR IV SPLIT ────────────────────────── -->
+<div class="split-section" style="background:#0c0c13;">
+  <div class="split-left">
+    <div class="left-content" id="physicsLeft">
+      <div class="section-counter" id="physicsCounter">Pillar IV, What Was Done</div>
+      <h2 class="section-label" id="physicsLabel">Training a Model on Nature</h2>
+      <p class="section-body" id="physicsBody">Archivara's agent trained a <strong>physics-informed model on dynamical trajectory data</strong>, the kind of observational data that is the raw material of all experimental science. Rather than being told the equations governing the system, the model learned the Hamiltonian structure of the system from position and momentum observations, then applied symbolic regression to the learned energy functionals to recover the governing equations in closed, human-readable form. The result: governing laws extracted autonomously from data, with no prior knowledge of what those laws should be.</p>
+      <span class="section-tag" id="physicsTag">Physical Law Discovery</span><br>
+      <a href="https://archivara.org/browse" target="_blank" class="section-link" id="physicsLink">View paper on archivara.org &rarr;</a>
+    </div>
+  </div>
+  <div class="split-right">
+    <div class="panel" data-group="physics" data-index="0"><canvas id="physicsC0"></canvas><div class="panel-overlay"></div></div>
+    <div class="panel" data-group="physics" data-index="1"><canvas id="physicsC1"></canvas><div class="panel-overlay"></div></div>
+  </div>
+</div>
+
+<!-- ─── PILLAR IV SYNTHESIS ──────────────────── -->
+<div class="synthesis-section" style="background:#0c0c13;">
+  <div class="synthesis-inner fade-in-up">
+    <p class="synthesis-eyebrow">Why This Separates Archivara from Axiom Math</p>
+    <p class="synthesis-text">Axiom Math, the best-funded competitor in the AI mathematics space, has explicitly defined its mission as building a superintelligent mathematician. Mathematics is the domain. Archivara's physics discovery paper changes the terms of that comparison: Archivara is not a mathematics platform that happens to also do physics. It is a scientific discovery platform that began with mathematics because mathematics is the foundation of all quantitative science, and is now demonstrating that the same agent architecture, the same archive-driven compounding loop, generalizes to empirical disciplines where the inputs are not axioms but observations. An agent that can derive physical laws from trajectory data can, with the right data and appropriate physical priors, do the same for chemistry, biology, engineering, and any domain where the world behaves according to learnable rules. Axiom solves theorems. Archivara discovers science.</p>
+  </div>
+</div>
+
+<!-- ─── PILLAR V HEADER ───────────────────────── -->
+<div class="deep-header">
+  <div class="deep-header-inner fade-in-up">
+    <p class="deep-eyebrow">Pillar V, Scientific Tool Generation</p>
+    <h2>Tools That Do the Work<br>Real Scientists Have to Do</h2>
+    <p>Alongside the physics paper, Archivara's agent produced four papers in the domain of asteroid characterization, three focused tools and one compilation, each addressing a concrete, unsolved operational problem that practicing astronomers and planetary scientists face in their daily research. These are not demonstrations. They are working scientific software, published with full reproducible code.</p>
+  </div>
+</div>
+
+<!-- ─── PILLAR V SPLIT ────────────────────────── -->
+<div class="split-section">
+  <div class="split-left">
+    <div class="left-content" id="asteroidLeft">
+      <div class="section-counter" id="asteroidCounter">Pillar V, Tool 01 / 04</div>
+      <h2 class="section-label" id="asteroidLabel">Lightcurve Period Extraction</h2>
+      <p class="section-body" id="asteroidBody">Every asteroid rotates. Measuring that rotation period from sparse, noisy ground-based photometry is one of the most common and most tedious tasks in small-body astronomy. Archivara's agent produced a <strong>full Python tool for automated lightcurve period extraction</strong>, handling phase folding, period disambiguation, and confidence estimation, a tool that saves an observing astronomer hours of manual fitting per target.</p>
+      <span class="section-tag" id="asteroidTag">Photometry Automation</span><br>
+      <a href="https://archivara.org/browse" target="_blank" class="section-link" id="asteroidLink">View paper on archivara.org &rarr;</a>
+    </div>
+  </div>
+  <div class="split-right">
+    <div class="panel" data-group="asteroid" data-index="0"><canvas id="asteroidC0"></canvas><div class="panel-overlay"></div></div>
+    <div class="panel" data-group="asteroid" data-index="1"><canvas id="asteroidC1"></canvas><div class="panel-overlay"></div></div>
+    <div class="panel" data-group="asteroid" data-index="2"><canvas id="asteroidC2"></canvas><div class="panel-overlay"></div></div>
+    <div class="panel" data-group="asteroid" data-index="3"><canvas id="asteroidC3"></canvas><div class="panel-overlay"></div></div>
+  </div>
+</div>
+
+<!-- ─── PILLAR V SYNTHESIS ───────────────────── -->
+<div class="synthesis-section">
+  <div class="synthesis-inner fade-in-up">
+    <p class="synthesis-eyebrow">Tools Plus Archive Equals a New Kind of Scientific Infrastructure</p>
+    <p class="synthesis-text">Each of the four asteroid papers delivers a working, standalone tool. But the deeper significance is what happens when those tools are combined. A scientist who uploads new observational photometry can now invoke the period extraction tool, feed its output directly into the 3D shape reconstruction tool, combine the resulting shape model with the spectroscopic typing tool, and then run the full pipeline through the compilation workflow, end to end, with no new code written. This is not a suite of disconnected utilities. This is the beginning of a composable scientific software stack, one where each new tool deposited in the archive becomes a building block available to every future workflow. For research groups without dedicated software engineers, and for institutions where instrument time is expensive, this composability is transformative. Archivara's archive does not just store results. It accumulates capability.</p>
+  </div>
+</div>
+
+<!-- ─── DEFENSIBILITY ────────────────────────── -->
+<section id="defense-section">
+  <div class="defense-inner">
+    <p class="eyebrow">Defensibility and Exclusivity</p>
+    <h2 class="fade-in-up">A Strong<br>and Growing<br>Data Moat.</h2>
+    <p class="fade-in-up">Archivara has a stronger IP protection mechanism than pre-print servers like arXiv. The proofs, results, tools, and interactive agent architecture are exclusively hosted within our proprietary platform. Competitors cannot replicate our compute efficiencies without access to our closed ecosystem, and our interdisciplinary capabilities set us apart among similar ventures.</p>
+    <p class="fade-in-up" style="margin-top:1.8rem;">What makes Archivara significant beyond any single result is the structural position it is building at the intersection of AI and the scientific enterprise. The history of science is a history of compounding: each generation of researchers inherits the tools, methods, and open problems of the last. Archivara is the first platform designed to make that compounding machine-speed. Every paper deposited, every tool generated, every proof constructed becomes a permanent node in a growing network of scientific knowledge that any future agent can traverse and extend. We are not building a tool that helps scientists work faster. We are building the infrastructure layer through which AI will participate in science as a full contributor, discovering laws, solving problems that have stood for decades, and generating an entirely new class of intellectual property that no single human researcher or team could reach alone. The scientific problems that will matter most to humanity in the next fifty years, in medicine, energy, materials, and computation, will be solved faster, and some may only be solvable at all, because platforms like Archivara exist.</p>
+  </div>
+</section>
+
+<!-- ─── CTA ──────────────────────────────────── -->
+<section id="cta-section">
+  <canvas id="ctaCanvas"></canvas>
+  <div class="cta-inner">
+    <p class="eyebrow">Access and Verification</p>
+    <h2>Access<br>The Archive.</h2>
+    <p>The full archive of proofs, files, and our autonomous agent are securely gated. For technical due diligence or to explore the internal science archive, access the Archivara portal directly.</p>
+    <a href="https://archivara.org" target="_blank" class="btn-primary">Enter archivara.org &rarr;</a>
+  </div>
+</section>
+
+<script>
+// ── UTILITIES ─────────────────────────────────────
+window.addEventListener('scroll', () => {
+  const d = document.documentElement;
+  document.getElementById('progressBar').style.width =
+    (d.scrollTop / (d.scrollHeight - d.clientHeight) * 100) + '%';
+});
+const fioObs = new IntersectionObserver(es => es.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); }), { threshold: 0.12 });
+document.querySelectorAll('.fade-in-up').forEach(el => fioObs.observe(el));
+
+// ── GENERIC SPLIT SPY ─────────────────────────────
+function makeSplitSpy(group, leftId, data) {
+  const lc = document.getElementById(leftId);
+  let cur = 0;
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (!e.isIntersecting) return;
+      const idx = +e.target.dataset.index;
+      if (idx === cur) return;
+      cur = idx;
+      lc.classList.add('transitioning');
+      setTimeout(() => {
+        const d = data[idx];
+        lc.querySelector('[id$="Counter"]').textContent = d.counter;
+        lc.querySelector('[id$="Label"]').textContent   = d.label;
+        lc.querySelector('[id$="Body"]').innerHTML      = d.body;
+        lc.querySelector('[id$="Tag"]').textContent     = d.tag;
+        const link = lc.querySelector('[id$="Link"]');
+        if (link && d.link) { link.href = d.link; link.textContent = (d.linkText||'View paper') + ' \u2192'; }
+        lc.classList.remove('transitioning');
+      }, 350);
+    });
+  }, { threshold: 0.5 });
+  document.querySelectorAll(`.panel[data-group="${group}"]`).forEach(p => obs.observe(p));
+}
+
+makeSplitSpy('algo', 'algoLeft', [
+  { counter:'Problem 01 / 03', label:'The 16x16 Matrix Breakthrough',
+    body:'Matrix multiplication is the <strong>computational primitive</strong> underpinning all of modern AI. Every transformer attention head and every neural network forward pass reduces to matrix multiplication. Archivara\'s agent discovered a fundamentally <strong>new algebraic structure</strong> that reduces the number of scalar multiplications required to multiply two 16x16 matrices, by exploiting a previously unknown tensor decomposition of the bilinear map. This structure does not follow from existing Strassen-style recursion or known rank decompositions. It maps directly onto GPU tensor core tile sizes for immediate hardware-level impact, and because it exposes a generalizable algebraic pattern, it is recursively applicable to larger matrix dimensions, making it a foundational result rather than an isolated trick.',
+    tag:'GPU-Native Optimization', link:'https://archivara.org/browse', linkText:'View paper on archivara.org' },
+  { counter:'Problem 02 / 03', label:'Cyclotronic 5x5: Breaking the 2019 Benchmark',
+    body:'The 5-point cyclic convolution underpins signal processing, coding theory, and CNNs. The theoretical minimum of <strong>7 multiplications</strong> had been known but never achieved in practice. All verified algorithms required 8. Archivara\'s agent produced the first practical rank-7 algorithm, exploiting irrational algebraic parameters, achieving a 12.5% reduction per operation and a <strong>23.4% reduction in 2D convolutions</strong>, breaking the 2019 benchmark.',
+    tag:'Signal Processing', link:'https://archivara.org/browse', linkText:'View paper on archivara.org' },
+  { counter:'Problem 03 / 03', label:"Moser's Worm Problem: A New Numerical Record",
+    body:'Leo Moser\'s Worm Problem asks for the minimum-area planar region containing every unit-length curve under rotation and translation. Archivara\'s agent performed constrained numerical optimization over the ellipse-locus construction family, discovering parameters (a,b) = (1.95472, 4.595428...) yielding area A = 0.26006959..., a <strong>strict improvement over the 2018 world record</strong> of 0.26006972..., with fully reproducible Python code published in the archive.',
+    tag:'Combinatorial Geometry', link:'https://archivara.org/pdf/927a9c63-afb5-4789-8ed5-c323e961056e', linkText:'View paper on archivara.org' }
+]);
+
+makeSplitSpy('erdos', 'erdosLeft', [
+  { counter:'Pillar II, Context', label:'The Challenge of Abstract Reasoning',
+    body:'Optimization solves problems within known structures. Abstract reasoning requires constructing entirely new chains of thought in uncharted territory. This is the distinction Terence Tao identified in November 2025 when he asked whether AI systems capable in lower-level combinatorics could achieve comparable results in fields requiring <strong>"forbidding levels of abstraction."</strong> Erdos Problem 897 sits precisely in that territory.',
+    tag:'Abstract Mathematics', link:'https://archivara.org/browse', linkText:'View paper on archivara.org' },
+  { counter:'Pillar II, The Result', label:'An Original Chain of Thought',
+    body:'Archivara\'s agent produced an <strong>original, non-retrieval proof</strong> for Erdos 897. The result was not achieved by brute-force search, recombination of known sub-proofs, or pattern-matching against training data. The chain of reasoning was independently constructed, representing the kind of conceptual leap that Tao predicted AI systems would need to demonstrate before earning the status of <strong>trustworthy co-author</strong> by 2026.',
+    tag:'Novel Proof Construction', link:'https://archivara.org/browse', linkText:'View paper on archivara.org' },
+  { counter:'Pillar II, Impact', label:'Why This Matters for Researchers',
+    body:'For researchers, the Erdos result means Archivara can engage with problems where existing literature offers no direct foothold. For developers, it means reasoning infrastructure that <strong>generalizes to novel domains</strong>, not just those with large training corpora. For enterprises, the platform can operate at the frontier of fields where human expertise is scarcest and most expensive, exactly where the value of AI co-authorship is highest.',
+    tag:'R&D Impact', link:'https://archivara.org/browse', linkText:'View paper on archivara.org' }
+]);
+
+makeSplitSpy('rado', 'radoLeft', [
+  { counter:'Pillar III, Seed Paper', label:'A Researcher Uploads New Work',
+    body:'Alejandro Zarzuelo Urdiales, a member of the Archivara team, uploaded a new, previously unpublished paper in graph theory to test a core platform use case: what happens when a scientist deposits genuinely <strong>original, unreviewed research</strong> into the archive? The paper introduced new structural results connecting several classes of graphs through a specific embedding construction. It had never been published, never been cited, and its downstream implications were entirely unexplored. That is the most common situation researchers actually face.',
+    tag:'Original Research Uploaded', link:'https://archivara.org/browse', linkText:'View original paper on archivara.org' },
+  { counter:'Pillar III, Agent Discoveries', label:'Three Results the Author Did Not Know',
+    body:'Reading the uploaded paper, Archivara\'s agent independently derived three results not present in the original work: a resolution of the <strong>Weighted Turan Problem</strong> within the embedding framework, a transfer theorem for <strong>Big Ramsey Degrees</strong> using the clique-size dominance construction, and a new approach to <strong>general graph isomorphism</strong> leveraging the universal embedding properties. None were known to the author prior to the agent\'s analysis.',
+    tag:'Three Novel Discoveries', link:'https://archivara.org/browse', linkText:'View agent papers on archivara.org' },
+  { counter:'Pillar III, Flywheel Effect', label:'One Paper Becomes Four',
+    body:'This is the compounding effect at its most commercially significant. A researcher publishes one result and receives three discoveries back. Every paper uploaded to Archivara becomes a <strong>seed for further discovery</strong>, multiplying the return on every investment in original research. The moat widens with every contribution, creating a powerful incentive for scientists and enterprises to keep their research pipeline active within the Archivara ecosystem.',
+    tag:'Compounding Innovation', link:'https://archivara.org/browse', linkText:'Learn more on archivara.org' }
+]);
+
+makeSplitSpy('physics', 'physicsLeft', [
+  { counter:'Pillar IV, What Was Done', label:'Training a Model on Nature',
+    body:'Archivara\'s agent trained a <strong>physics-informed model on dynamical trajectory data</strong>. Rather than being told the governing equations, the model learned the Hamiltonian structure from position and momentum observations, then applied symbolic regression to recover the governing equations in closed, human-readable form. The result: physical laws extracted autonomously from observational data, with no prior knowledge of what those laws should be.',
+    tag:'Physical Law Discovery', link:'https://archivara.org/browse', linkText:'View paper on archivara.org' },
+  { counter:'Pillar IV, Why It Matters', label:'Science Has No Domain Boundary',
+    body:'Every competitor in AI scientific discovery today is defined by a single domain: mathematics, chemistry, protein structure, code. Archivara\'s physics paper demonstrates that the same agent architecture extends to <strong>any empirical domain where the inputs are observations rather than axioms</strong>. An agent that learns governing equations from trajectory data can, with the right data and physical priors, do the same for chemistry, biology, materials science, and engineering. Single-domain tools will always be outpaced by platforms whose discovery loop compounds across all of science.',
+    tag:'Cross-Domain Discovery', link:'https://archivara.org/browse', linkText:'View paper on archivara.org' }
+]);
+
+makeSplitSpy('asteroid', 'asteroidLeft', [
+  { counter:'Pillar V, Tool 01 / 04', label:'Lightcurve Period Extraction',
+    body:'Every asteroid rotates. Measuring that rotation period from sparse, noisy ground-based photometry is one of the most common and most tedious tasks in small-body astronomy. Archivara\'s agent produced a full Python tool for <strong>automated lightcurve period extraction</strong>, handling phase folding, period disambiguation, and confidence estimation. A task that costs observing astronomers hours of manual fitting per target, automated.',
+    tag:'Photometry Automation', link:'https://archivara.org/browse', linkText:'View paper on archivara.org' },
+  { counter:'Pillar V, Tool 02 / 04', label:'3D Shape Reconstruction',
+    body:'Knowing an asteroid\'s rotation period is only the start. The shape governs how it tumbles, how sunlight pressure evolves its orbit, and what a mission would encounter at its surface. Archivara\'s agent produced a tool for <strong>lightcurve inversion and convex 3D shape reconstruction</strong>, taking sparse multi-apparition photometry as input and outputting a polyhedral model with spin vector and sidereal period, using the same formalism as the best human-written tools in the field but generated and verified autonomously.',
+    tag:'Shape Reconstruction', link:'https://archivara.org/browse', linkText:'View paper on archivara.org' },
+  { counter:'Pillar V, Tool 03 / 04', label:'Spectroscopic Taxonomy',
+    body:'An asteroid\'s spectral type tells you what it is made of. Determining that type from multi-band photometry, without full spectroscopy, is a classification problem that requires fitting color indices against established spectral templates. Archivara\'s agent produced a <strong>photometric spectral typing tool</strong> that automates this classification pipeline, from raw filter photometry to taxonomic type with uncertainty bounds, the exact workflow that slows down large-survey follow-up programs.',
+    tag:'Spectral Classification', link:'https://archivara.org/browse', linkText:'View paper on archivara.org' },
+  { counter:'Pillar V, Tool 04 / 04', label:'The Compilation: End-to-End Characterization',
+    body:'The fourth paper combines all three tools into a <strong>single end-to-end asteroid characterization pipeline</strong>: input raw photometric time series, receive period, shape model, and spectral type. No custom code needed. The compilation paper demonstrates that outputs of independently created tools compose cleanly, because the archive stores not just results but the interfaces between them. Every new tool added to the archive becomes a building block available to every future pipeline, accumulating capability with each contribution.',
+    tag:'Composable Scientific Stack', link:'https://archivara.org/browse', linkText:'View compilation paper on archivara.org' }
+]);
+
+// ── CANVAS: HERO ─────────────────────────────────
+(function() {
+  const c = document.getElementById('heroCanvas'), ctx = c.getContext('2d');
+  let W, H, P;
+  const rsz = () => { W = c.width = innerWidth; H = c.height = innerHeight; };
+  const init = () => { P = Array.from({length:90}, () => ({x:Math.random()*W, y:Math.random()*H, vx:(Math.random()-.5)*.4, vy:(Math.random()-.5)*.4, r:Math.random()*1.5+.3, a:Math.random()})); };
+  function draw() {
+    ctx.clearRect(0,0,W,H);
+    const g = ctx.createRadialGradient(W/2,H/2,0,W/2,H/2,W*.7);
+    g.addColorStop(0,'rgba(30,18,5,.6)'); g.addColorStop(1,'rgba(10,10,15,0)');
+    ctx.fillStyle=g; ctx.fillRect(0,0,W,H);
+    P.forEach((p,i) => {
+      p.x+=p.vx; p.y+=p.vy;
+      if(p.x<0||p.x>W)p.vx*=-1; if(p.y<0||p.y>H)p.vy*=-1;
+      ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+      ctx.fillStyle=`rgba(232,159,94,${p.a*.6})`; ctx.fill();
+      for(let j=i+1;j<P.length;j++){
+        const q=P[j],dx=p.x-q.x,dy=p.y-q.y,d=Math.sqrt(dx*dx+dy*dy);
+        if(d<120){ctx.beginPath();ctx.moveTo(p.x,p.y);ctx.lineTo(q.x,q.y);ctx.strokeStyle=`rgba(232,159,94,${(1-d/120)*.12})`;ctx.lineWidth=.5;ctx.stroke();}
+      }
+    });
+    requestAnimationFrame(draw);
+  }
+  rsz(); init(); draw();
+  window.addEventListener('resize', ()=>{rsz();init();});
+})();
+
+// ── CANVAS: ALGO 0 , 16x16 matrix grid ───────────
+(function() {
+  const c = document.getElementById('algoC0'), ctx = c.getContext('2d');
+  let W, H, t=0;
+  const rsz = () => { W = c.width = c.offsetWidth; H = c.height = c.offsetHeight; };
+  rsz(); window.addEventListener('resize', rsz);
+  function draw() {
+    t+=.015;
+    ctx.fillStyle='rgba(13,13,20,.85)'; ctx.fillRect(0,0,W,H);
+    const SZ=Math.min(W,H)*.72, cw=SZ/16, ch=SZ/16, ox=(W-SZ)/2, oy=(H-SZ)/2;
+    for(let r=0;r<16;r++) for(let cl=0;cl<16;cl++) {
+      const v=Math.sin(cl*.5+r*.3+t)*.5+.5, x=ox+cl*cw, y=oy+r*ch, a=.15+v*.7;
+      ctx.fillStyle=`rgba(232,159,94,${a*.3})`; ctx.fillRect(x+1,y+1,cw-2,ch-2);
+      ctx.strokeStyle=`rgba(232,159,94,${a*.6})`; ctx.lineWidth=.5; ctx.strokeRect(x+.5,y+.5,cw-1,ch-1);
+      if(cw>18){ctx.fillStyle=`rgba(232,159,94,${a})`;ctx.font=`${cw*.28}px Axiforma,Montserrat,sans-serif`;ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText((Math.sin(cl*1.3+r*.9+t*.7)*9.9).toFixed(1),x+cw/2,y+ch/2);}
+    }
+    const d=Math.floor(t*3%16);
+    for(let i=0;i<16;i++){const x=ox+d*cw,y=oy+i*ch;ctx.fillStyle='rgba(232,159,94,.12)';ctx.fillRect(x+1,y+1,cw-2,ch-2);}
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
+
+// ── CANVAS: ALGO 1 , FFT frequency domain ────────
+(function() {
+  const c = document.getElementById('algoC1'), ctx = c.getContext('2d');
+  let W, H, t=0;
+  const rsz = () => { W = c.width = c.offsetWidth; H = c.height = c.offsetHeight; };
+  rsz(); window.addEventListener('resize', rsz);
+  const freqs = [.6,.9,.3,.7,.85,.4,.55,.2,.75,.65,.45,.5,.8,.35,.6,.7,.42,.58,.9,.25,.67,.78,.33,.88];
+  function draw() {
+    t+=.018;
+    ctx.fillStyle='rgba(13,13,20,.88)'; ctx.fillRect(0,0,W,H);
+    const sigY=H*.72, ampT=H*.1, barY=H*.38, barH=H*.26;
+    // Time domain
+    ctx.beginPath();
+    for(let i=0;i<=W;i++){
+      const x=i/W, s=Math.sin(x*Math.PI*10+t)*Math.cos(x*Math.PI*3-t*.4)*.6+Math.sin(x*Math.PI*5+t*1.3)*.3;
+      i===0?ctx.moveTo(i,sigY+s*ampT):ctx.lineTo(i,sigY+s*ampT);
+    }
+    ctx.strokeStyle='rgba(232,159,94,.55)'; ctx.lineWidth=1.5; ctx.stroke();
+    ctx.fillStyle='rgba(232,159,94,.3)'; ctx.font='.58rem Axiforma,Montserrat,sans-serif'; ctx.textAlign='left'; ctx.fillText('TIME DOMAIN', 30, sigY+ampT+20);
+    // Freq bars
+    const bw=(W-80)/freqs.length;
+    freqs.forEach((f,i)=>{
+      const a=f*(.7+Math.sin(t*1.2+i*.4)*.3), h=a*barH, x=40+i*bw;
+      const g=ctx.createLinearGradient(x,barY,x,barY-h);
+      g.addColorStop(0,'rgba(232,159,94,.12)'); g.addColorStop(1,'rgba(232,159,94,.85)');
+      ctx.fillStyle=g; ctx.fillRect(x, barY-h, bw-3, h);
+    });
+    ctx.fillStyle='rgba(232,159,94,.3)'; ctx.fillText('FREQUENCY DOMAIN', 30, barY-barH-14);
+    // Center label
+    ctx.fillStyle='rgba(232,159,94,.45)'; ctx.font='bold 1.3rem Axiforma,Montserrat,sans-serif'; ctx.textAlign='center'; ctx.fillText('FFT', W/2, barY+(sigY-ampT-barY)/2+4);
+    // Dashed connector
+    ctx.strokeStyle='rgba(232,159,94,.15)'; ctx.lineWidth=.5; ctx.setLineDash([3,5]);
+    ctx.beginPath(); ctx.moveTo(W/2,barY+8); ctx.lineTo(W/2,sigY-ampT-8); ctx.stroke(); ctx.setLineDash([]);
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
+
+// ── CANVAS: ALGO 2 , Worm problem ellipse cover ──
+(function() {
+  const c = document.getElementById('algoC2'), ctx = c.getContext('2d');
+  let W, H, t=0;
+  const rsz = () => { W = c.width = c.offsetWidth; H = c.height = c.offsetHeight; };
+  rsz(); window.addEventListener('resize', rsz);
+  function draw() {
+    t+=.009;
+    ctx.fillStyle='rgba(13,13,20,.88)'; ctx.fillRect(0,0,W,H);
+    const cx=W/2, cy=H/2, sc=Math.min(W,H)*.33;
+    // Draw ellipse cover outline
+    ctx.beginPath(); ctx.ellipse(cx, cy-sc*.08, sc*.82, sc*.24, 0, 0, Math.PI*2);
+    ctx.strokeStyle='rgba(232,159,94,.65)'; ctx.lineWidth=1.5; ctx.stroke();
+    ctx.fillStyle='rgba(232,159,94,.04)'; ctx.fill();
+    // Notch bottom
+    ctx.beginPath(); ctx.ellipse(cx, cy+sc*.09, sc*.82, sc*.14, 0, 0, Math.PI);
+    ctx.strokeStyle='rgba(232,159,94,.3)'; ctx.lineWidth=1; ctx.stroke();
+    // Worm curves inside
+    for(let w=0;w<7;w++){
+      const off=w*Math.PI*2/7;
+      ctx.beginPath();
+      for(let i=0;i<=60;i++){
+        const tt=i/60;
+        const x=cx+Math.cos(tt*Math.PI*4+t+off)*sc*.22*Math.sin(tt*Math.PI)*Math.cos(t*.3+off);
+        const y=cy+Math.sin(tt*Math.PI*3+t*.7+off)*sc*.09;
+        i===0?ctx.moveTo(x,y):ctx.lineTo(x,y);
+      }
+      ctx.strokeStyle=`rgba(232,159,94,${.08+w*.04})`; ctx.lineWidth=1; ctx.stroke();
+    }
+    // Glow center
+    const g=ctx.createRadialGradient(cx,cy,0,cx,cy,sc*.5);
+    g.addColorStop(0,'rgba(232,159,94,.06)'); g.addColorStop(1,'rgba(232,159,94,0)');
+    ctx.fillStyle=g; ctx.fillRect(0,0,W,H);
+    // Parameters
+    ctx.fillStyle='rgba(232,159,94,.45)'; ctx.font='.6rem Axiforma,Montserrat,sans-serif'; ctx.textAlign='left';
+    ctx.fillText('a = 1.95472', 28, H-72); ctx.fillText('b = 4.595428...', 28, H-54); ctx.fillText('A = 0.260069597...', 28, H-36);
+    // Delta
+    ctx.fillStyle='rgba(232,159,94,.25)'; ctx.font='.58rem Axiforma,Montserrat,sans-serif'; ctx.textAlign='right';
+    ctx.fillText('\u0394A \u2248 1.32 \u00d7 10\u207b\u2077', W-28, H-36);
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
+
+// ── CANVAS: ERDOS — shared log graph, progress tied to active panel ──
+(function() {
+  // The same graph lives on all 3 panels. As you scroll into each panel,
+  // the graph draws the next segment (with a jump), so panel 0 shows segment 1
+  // completing, panel 1 shows segment 2 completing, panel 2 shows segment 3 fully drawn.
+  // Target progress per panel: 0→1/3, 1→2/3, 2→3/3
+  const CANVASES = ['erdosC0','erdosC1','erdosC2'];
+
+  // Track which panel is currently most visible
+  let activePanelTarget = 0; // 0, 1/3, 2/3, 1 mapped from panel 0,1,2
+  let displayProgress   = 0;
+
+  const panels = CANVASES.map(id => document.getElementById(id)?.closest('.panel')).filter(Boolean);
+  const PANEL_TARGETS = [1/3, 2/3, 1];
+
+  // IntersectionObserver: when a panel enters view, set target to its segment end
+  const panelObs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (!e.isIntersecting) return;
+      const idx = panels.indexOf(e.target);
+      if (idx >= 0) activePanelTarget = PANEL_TARGETS[idx];
+    });
+  }, { threshold: 0.45 });
+  panels.forEach(p => panelObs.observe(p));
+
+  // Graph layout constants
+  const SEG_Y_START = [0.02, 0.30, 0.60];
+  const SEG_Y_END   = [0.24, 0.54, 0.94];
+  const LABELS      = ['Combinatorics', 'Abstract Reasoning', 'Open Frontier'];
+  const SUBLABELS   = ['Structured problem solving', 'Erdős 897 — original proof', 'Algebraic topology & beyond'];
+  const PTS_PER_SEG = 80;
+  const TOTAL_PTS   = PTS_PER_SEG * 3;
+
+  function segPoints(s) {
+    const x0 = s/3, x1 = (s+1)/3;
+    const y0 = SEG_Y_START[s], y1 = SEG_Y_END[s];
+    return Array.from({length: PTS_PER_SEG+1}, (_,i) => {
+      const t = i / PTS_PER_SEG;
+      const lx = x0 + t*(x1-x0);
+      const ly = y0 + (y1-y0) * Math.log(1+t*Math.E) / Math.log(1+Math.E);
+      return [lx, ly];
+    });
+  }
+  const ALL_SEGS = [segPoints(0), segPoints(1), segPoints(2)];
+
+  function drawGraph(c) {
+    if (!c.offsetWidth) return;
+    if (c.width !== c.offsetWidth)  c.width  = c.offsetWidth;
+    if (c.height !== c.offsetHeight) c.height = c.offsetHeight;
+    const ctx = c.getContext('2d');
+    const W = c.width, H = c.height;
+    ctx.clearRect(0,0,W,H);
+    ctx.fillStyle='rgba(9,9,15,1)'; ctx.fillRect(0,0,W,H);
+
+    const PL=56, PR=28, PT=44, PB=52;
+    const GW=W-PL-PR, GH=H-PT-PB;
+    const cx = nx => PL + nx*GW;
+    const cy = ny => PT + GH*(1-ny);
+
+    // Faint grid
+    ctx.strokeStyle='rgba(232,159,94,.07)'; ctx.lineWidth=.5;
+    for(let i=0;i<=4;i++){const y=PT+GH*(1-i/4);ctx.beginPath();ctx.moveTo(PL,y);ctx.lineTo(PL+GW,y);ctx.stroke();}
+    // Axes
+    ctx.strokeStyle='rgba(232,159,94,.2)'; ctx.lineWidth=.8;
+    ctx.beginPath();ctx.moveTo(PL,PT+GH);ctx.lineTo(PL+GW,PT+GH);ctx.stroke();
+    ctx.beginPath();ctx.moveTo(PL,PT);ctx.lineTo(PL,PT+GH);ctx.stroke();
+    // Axis labels
+    const fs = Math.max(9,GW*.026);
+    ctx.fillStyle='rgba(232,159,94,.32)'; ctx.font=`500 ${fs}px Axiforma,Montserrat,sans-serif`;
+    ctx.textAlign='center'; ctx.fillText('Abstract Reasoning Complexity →', PL+GW/2, H-7);
+    ctx.save(); ctx.translate(13, PT+GH/2); ctx.rotate(-Math.PI/2);
+    ctx.fillText('AI Capability', 0, 0); ctx.restore();
+
+    const drawCount = Math.floor(displayProgress * TOTAL_PTS);
+    let drawn=0, lastPt=null;
+
+    for(let s=0; s<3; s++) {
+      const pts = ALL_SEGS[s];
+      // Jump connector before this segment (except first)
+      if(s>0 && drawn < drawCount && lastPt) {
+        const jumpTo = [pts[0][0], pts[0][1]];
+        ctx.beginPath(); ctx.setLineDash([4,5]);
+        ctx.strokeStyle='rgba(232,159,94,.5)'; ctx.lineWidth=1.5;
+        ctx.moveTo(cx(lastPt[0]),cy(lastPt[1])); ctx.lineTo(cx(jumpTo[0]),cy(jumpTo[1])); ctx.stroke();
+        ctx.setLineDash([]);
+        ctx.beginPath(); ctx.arc(cx(lastPt[0]),cy(lastPt[1]),4.5,0,Math.PI*2);
+        ctx.fillStyle='rgba(232,159,94,.65)'; ctx.fill();
+        lastPt = jumpTo;
+      }
+      // Draw segment points up to drawCount
+      for(let i=0; i<pts.length && drawn<drawCount; i++, drawn++) {
+        const [lx,ly]=pts[i];
+        if(!lastPt){lastPt=[lx,ly];continue;}
+        ctx.beginPath();
+        const g=ctx.createLinearGradient(cx(lastPt[0]),0,cx(lx),0);
+        g.addColorStop(0,'rgba(232,159,94,.75)'); g.addColorStop(1,'rgba(242,188,138,.98)');
+        ctx.strokeStyle=g; ctx.lineWidth=2.6;
+        ctx.moveTo(cx(lastPt[0]),cy(lastPt[1])); ctx.lineTo(cx(lx),cy(ly)); ctx.stroke();
+        lastPt=[lx,ly];
+      }
+      // Segment label — appear as soon as the segment starts drawing
+      if(drawCount > s*PTS_PER_SEG + 6) {
+        const lx = cx(s/3+0.01), ly = cy(SEG_Y_START[s]) - 30;
+        ctx.fillStyle='rgba(232,159,94,.72)';
+        ctx.font=`600 ${Math.max(9,GW*.027)}px Axiforma,Montserrat,sans-serif`;
+        ctx.textAlign='left'; ctx.fillText(LABELS[s], lx, ly);
+        ctx.fillStyle='rgba(232,159,94,.38)';
+        ctx.font=`400 ${Math.max(8,GW*.023)}px Axiforma,Montserrat,sans-serif`;
+        ctx.fillText(SUBLABELS[s], lx, ly+15);
+      }
+      if(drawn>=drawCount) break;
+    }
+
+    // Glowing leading dot
+    if(lastPt && displayProgress>0.01) {
+      const gx=cx(lastPt[0]), gy=cy(lastPt[1]);
+      const glow=ctx.createRadialGradient(gx,gy,0,gx,gy,20);
+      glow.addColorStop(0,'rgba(242,188,138,.92)'); glow.addColorStop(.45,'rgba(232,159,94,.35)'); glow.addColorStop(1,'rgba(232,159,94,0)');
+      ctx.beginPath(); ctx.arc(gx,gy,20,0,Math.PI*2); ctx.fillStyle=glow; ctx.fill();
+      ctx.beginPath(); ctx.arc(gx,gy,3.8,0,Math.PI*2); ctx.fillStyle='rgba(255,232,185,1)'; ctx.fill();
+    }
+  }
+
+  let canvases = [];
+  function initCanvases() {
+    canvases = CANVASES.map(id => document.getElementById(id)).filter(Boolean);
+  }
+  window.addEventListener('resize', () => canvases.forEach(c=>{c.width=c.offsetWidth;c.height=c.offsetHeight;}));
+
+  function animLoop() {
+    // Ease toward the target for the active panel
+    displayProgress += (activePanelTarget - displayProgress) * 0.045;
+    if(!canvases.length) initCanvases();
+    canvases.forEach(drawGraph);
+    requestAnimationFrame(animLoop);
+  }
+  initCanvases();
+  animLoop();
+})();
+
+// ── CANVAS: RADO 0,1,2 , graph theory colored cliques
+function makeRadoCanvas(id, complexity) {
+  const c = document.getElementById(id), ctx = c.getContext('2d');
+  let W, H, t=0, nodes=[], edges=[];
+  const COLS = [[232,159,94],[110,195,150],[160,140,220],[220,110,100],[100,180,220]];
+  const rsz = () => { W=c.width=c.offsetWidth; H=c.height=c.offsetHeight; initG(); };
+  function initG() {
+    const n=28+complexity*8;
+    nodes = Array.from({length:n}, (_,i) => ({x:80+Math.random()*(W-160),y:80+Math.random()*(H-160),vx:(Math.random()-.5)*.28,vy:(Math.random()-.5)*.28,r:2.5+Math.random()*2.5,cl:Math.floor(Math.random()*(3+complexity)),ph:Math.random()*Math.PI*2}));
+    edges=[];
+    nodes.forEach((a,i)=>nodes.forEach((b,j)=>{
+      if(j<=i)return;
+      const dx=a.x-b.x,dy=a.y-b.y,d=Math.sqrt(dx*dx+dy*dy);
+      if(d<110+complexity*18&&Math.random()<.38)edges.push([i,j]);
+    }));
+  }
+  rsz(); window.addEventListener('resize', rsz);
+  function draw() {
+    t+=.007;
+    ctx.fillStyle='rgba(10,10,15,.88)'; ctx.fillRect(0,0,W,H);
+    nodes.forEach(n=>{n.x+=n.vx;n.y+=n.vy;if(n.x<40||n.x>W-40)n.vx*=-1;if(n.y<40||n.y>H-40)n.vy*=-1;});
+    edges.forEach(([i,j])=>{
+      const a=nodes[i],b=nodes[j],same=a.cl===b.cl;
+      const col=COLS[a.cl%COLS.length];
+      ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);
+      ctx.strokeStyle=`rgba(${col},${same?.32:.1})`;ctx.lineWidth=same?1.2:.5;ctx.stroke();
+    });
+    nodes.forEach(n=>{
+      const pulse=.85+Math.sin(t*1.5+n.ph)*.15,col=COLS[n.cl%COLS.length];
+      const g=ctx.createRadialGradient(n.x,n.y,0,n.x,n.y,n.r*3.5*pulse);
+      g.addColorStop(0,`rgba(${col},.85)`);g.addColorStop(1,`rgba(${col},0)`);
+      ctx.beginPath();ctx.arc(n.x,n.y,n.r*3.5*pulse,0,Math.PI*2);ctx.fillStyle=g;ctx.fill();
+      ctx.beginPath();ctx.arc(n.x,n.y,n.r,0,Math.PI*2);ctx.fillStyle=`rgba(${col},1)`;ctx.fill();
+    });
+    const LBL=['RADO GRAPH','WEIGHTED TURAN','RAMSEY DEGREES'];
+    ctx.fillStyle='rgba(232,159,94,.07)';ctx.font=`bold ${Math.min(W*.07,42)}px Axiforma,Montserrat,sans-serif`;ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(LBL[complexity%3],W/2,H*.88);
+    requestAnimationFrame(draw);
+  }
+  draw();
+}
+makeRadoCanvas('radoC0',0);
+makeRadoCanvas('radoC1',1);
+makeRadoCanvas('radoC2',2);
+
+// ── CANVAS: PHYSICS 0 , Hamiltonian field / energy surface ──
+(function() {
+  const c=document.getElementById('physicsC0'),ctx=c.getContext('2d');
+  let W,H,t=0;
+  const rsz=()=>{W=c.width=c.offsetWidth;H=c.height=c.offsetHeight;};
+  rsz();window.addEventListener('resize',rsz);
+  function draw(){
+    t+=.012;ctx.fillStyle='rgba(12,12,19,.88)';ctx.fillRect(0,0,W,H);
+    // Draw energy surface as coloured contour field
+    const RES=6;
+    for(let px=0;px<W;px+=RES){
+      for(let py=0;py<H;py+=RES){
+        const nx=(px/W)*4-2, ny=(py/H)*4-2;
+        // Hamiltonian: H = p²/2 + q² + 0.1*q⁴ — a nonlinear oscillator
+        const H_val=(nx*nx*0.5 + ny*ny + 0.1*ny*ny*ny*ny + Math.sin(t*0.3 + nx*0.8)*0.2);
+        const norm=Math.max(0,Math.min(1,(H_val-0)/(4.5)));
+        const alpha=0.06+norm*0.3;
+        const r=Math.floor(232*norm+80*(1-norm)), g2=Math.floor(159*norm+100*(1-norm)), b=Math.floor(94*norm+150*(1-norm));
+        ctx.fillStyle=`rgba(${r},${g2},${b},${alpha})`;
+        ctx.fillRect(px,py,RES,RES);
+      }
+    }
+    // Animated trajectory particle following Hamiltonian flow
+    const traj_q = Math.cos(t*0.9)*1.2, traj_p = -Math.sin(t*0.9)*1.2;
+    const tx=W/2+traj_q*(W*0.2), ty=H/2-traj_p*(H*0.2);
+    const glow=ctx.createRadialGradient(tx,ty,0,tx,ty,22);
+    glow.addColorStop(0,'rgba(255,220,150,1)'); glow.addColorStop(.5,'rgba(232,159,94,.4)'); glow.addColorStop(1,'rgba(232,159,94,0)');
+    ctx.beginPath();ctx.arc(tx,ty,22,0,Math.PI*2);ctx.fillStyle=glow;ctx.fill();
+    ctx.beginPath();ctx.arc(tx,ty,3.5,0,Math.PI*2);ctx.fillStyle='rgba(255,240,200,1)';ctx.fill();
+    // Labels
+    ctx.fillStyle='rgba(232,159,94,.4)';ctx.font=`.6rem Axiforma,Montserrat,sans-serif`;ctx.textAlign='left';
+    ctx.fillText('PHASE SPACE',20,H-50); ctx.fillText('H(q,p) = p²/2 + V(q)',20,H-32);
+    ctx.fillStyle='rgba(232,159,94,.2)';ctx.font=`bold ${Math.min(W*.09,54)}px Axiforma,Montserrat,sans-serif`;
+    ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText('HAMILTONIAN',W/2,H*.86);
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
+
+// ── CANVAS: PHYSICS 1 , symbolic regression output ──
+(function() {
+  const c=document.getElementById('physicsC1'),ctx=c.getContext('2d');
+  let W,H,t=0;
+  const rsz=()=>{W=c.width=c.offsetWidth;H=c.height=c.offsetHeight;};
+  rsz();window.addEventListener('resize',rsz);
+  // Show "observed data → learned curve" visual
+  const dataPoints = Array.from({length:18},(_,i)=>{
+    const q=i/17*4-2;
+    const Vtrue=q*q+0.1*q*q*q*q;
+    return {q, V:Vtrue+((Math.random()-.5)*0.08)};
+  });
+  function draw(){
+    t+=.01;ctx.fillStyle='rgba(12,12,19,.9)';ctx.fillRect(0,0,W,H);
+    const PAD=50,GW=W-2*PAD,GH=H-2*PAD-40;
+    const xm=n=>PAD+((n+2)/4)*GW, ym=v=>PAD+GH-(v/4.5)*GH;
+    // True learned curve (solid gold)
+    ctx.beginPath();
+    for(let i=0;i<=100;i++){
+      const q=-2+i*4/100;
+      const V=q*q+0.1*q*q*q*q;
+      i===0?ctx.moveTo(xm(q),ym(V)):ctx.lineTo(xm(q),ym(V));
+    }
+    ctx.strokeStyle='rgba(232,159,94,.8)';ctx.lineWidth=2;ctx.stroke();
+    // Data scatter
+    dataPoints.forEach(({q,V})=>{
+      ctx.beginPath();ctx.arc(xm(q),ym(V),3.5,0,Math.PI*2);
+      ctx.fillStyle='rgba(200,220,255,.55)';ctx.fill();
+    });
+    // Axes
+    ctx.strokeStyle='rgba(232,159,94,.2)';ctx.lineWidth=.8;
+    ctx.beginPath();ctx.moveTo(PAD,PAD);ctx.lineTo(PAD,PAD+GH);ctx.lineTo(PAD+GW,PAD+GH);ctx.stroke();
+    // Labels
+    ctx.fillStyle='rgba(200,220,255,.5)';ctx.font=`.58rem Axiforma,Montserrat,sans-serif`;ctx.textAlign='left';
+    ctx.fillText('● observed data',PAD+8,PAD+20);
+    ctx.fillStyle='rgba(232,159,94,.6)';
+    ctx.fillText('─ recovered: V(q) = q² + 0.1q⁴',PAD+8,PAD+36);
+    ctx.fillStyle='rgba(232,159,94,.18)';ctx.font=`bold ${Math.min(W*.07,40)}px Axiforma,Montserrat,sans-serif`;
+    ctx.textAlign='center';ctx.textBaseline='bottom';
+    ctx.fillText('SYMBOLIC REGRESSION',W/2,H-8);
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
+
+// ── CANVAS: ASTEROID 0 — lightcurve / period plot ──
+(function(){
+  const c=document.getElementById('asteroidC0'),ctx=c.getContext('2d');
+  let W,H,t=0;
+  const rsz=()=>{W=c.width=c.offsetWidth;H=c.height=c.offsetHeight;};
+  rsz();window.addEventListener('resize',rsz);
+  function draw(){
+    t+=.014;ctx.fillStyle='rgba(12,12,19,.9)';ctx.fillRect(0,0,W,H);
+    const PAD=40,GW=W-2*PAD,GH=H*.46,OY=H*.58;
+    // Lightcurve — folded
+    ctx.beginPath();
+    for(let i=0;i<=W;i++){
+      const ph=i/W*2*Math.PI;
+      const flux=.5-.18*Math.cos(ph)-.07*Math.cos(2*ph+.4)+Math.sin(t*.2)*.01;
+      const y=OY-flux*GH;
+      i===0?ctx.moveTo(i,y):ctx.lineTo(i,y);
+    }
+    ctx.strokeStyle='rgba(232,159,94,.75)';ctx.lineWidth=2;ctx.stroke();
+    // Phase-fold label
+    ctx.fillStyle='rgba(232,159,94,.38)';ctx.font=`.58rem Axiforma,Montserrat,sans-serif`;ctx.textAlign='left';
+    ctx.fillText('PHASE-FOLDED LIGHTCURVE',PAD,PAD+14);
+    // Period bar
+    const barY=OY+GH*.22;
+    ctx.fillStyle='rgba(232,159,94,.12)';ctx.fillRect(PAD,barY-18,GW,36);
+    ctx.fillStyle='rgba(232,159,94,.7)';ctx.font=`.62rem Axiforma,Montserrat,sans-serif`;ctx.textAlign='center';
+    ctx.fillText('ROTATION PERIOD  P = 3.4714 ± 0.0003 h',W/2,barY+6);
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
+
+// ── CANVAS: ASTEROID 1 — 3D wireframe shape ──
+(function(){
+  const c=document.getElementById('asteroidC1'),ctx=c.getContext('2d');
+  let W,H,t=0;
+  const rsz=()=>{W=c.width=c.offsetWidth;H=c.height=c.offsetHeight;};
+  rsz();window.addEventListener('resize',rsz);
+  const verts=Array.from({length:32},(_,i)=>{
+    const th=(i/32)*Math.PI*2,ph=(Math.random()-.5)*Math.PI;
+    const r=110*(.6+Math.random()*.5);
+    return[r*Math.cos(ph)*Math.cos(th),r*Math.cos(ph)*Math.sin(th),r*Math.sin(ph)];
+  });
+  const rY=(v,a)=>{const[x,y,z]=v;return[x*Math.cos(a)-z*Math.sin(a),y,x*Math.sin(a)+z*Math.cos(a)];};
+  const rX=(v,a)=>{const[x,y,z]=v;return[x,y*Math.cos(a)-z*Math.sin(a),y*Math.sin(a)+z*Math.cos(a)];};
+  function draw(){
+    t+=.008;ctx.fillStyle='rgba(12,12,19,.88)';ctx.fillRect(0,0,W,H);
+    const rot=verts.map(v=>rX(rY(v,t),t*.35));
+    const proj=rot.map(([x,y,z])=>{const s=360/(360+z);return[W/2+x*s,H/2+y*s,s];});
+    rot.forEach((_,i)=>rot.forEach((_,j)=>{
+      if(j<=i)return;
+      const d=Math.sqrt(rot[i].reduce((s,v,k)=>(v-rot[j][k])**2+s,0));
+      if(d<115){const avg=(proj[i][2]+proj[j][2])/2;ctx.beginPath();ctx.moveTo(proj[i][0],proj[i][1]);ctx.lineTo(proj[j][0],proj[j][1]);ctx.strokeStyle=`rgba(232,159,94,${avg*.55})`;ctx.lineWidth=avg*.9;ctx.stroke();}
+    }));
+    proj.forEach(([x,y,s])=>{const g=ctx.createRadialGradient(x,y,0,x,y,5*s);g.addColorStop(0,`rgba(250,210,160,${s})`);g.addColorStop(1,'rgba(232,159,94,0)');ctx.beginPath();ctx.arc(x,y,3.5*s,0,Math.PI*2);ctx.fillStyle=g;ctx.fill();});
+    ctx.beginPath();ctx.ellipse(W/2,H/2,190,46,t*.18,0,Math.PI*2);ctx.strokeStyle='rgba(232,159,94,.07)';ctx.lineWidth=1;ctx.stroke();
+    ctx.fillStyle='rgba(232,159,94,.18)';ctx.font=`bold ${Math.min(W*.06,36)}px Axiforma,Montserrat,sans-serif`;ctx.textAlign='center';ctx.textBaseline='bottom';ctx.fillText('3D SHAPE RECONSTRUCTION',W/2,H-10);
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
+
+// ── CANVAS: ASTEROID 2 — spectral taxonomy bars ──
+(function(){
+  const c=document.getElementById('asteroidC2'),ctx=c.getContext('2d');
+  let W,H,t=0;
+  const rsz=()=>{W=c.width=c.offsetWidth;H=c.height=c.offsetHeight;};
+  rsz();window.addEventListener('resize',rsz);
+  const TYPES=[{lbl:'S-type',score:.82,col:'232,159,94'},{lbl:'C-type',score:.11,col:'110,195,150'},{lbl:'X-type',score:.05,col:'160,140,220'},{lbl:'V-type',score:.02,col:'220,110,100'}];
+  function draw(){
+    t+=.01;ctx.fillStyle='rgba(12,12,19,.9)';ctx.fillRect(0,0,W,H);
+    const PAD=44,GW=W-2*PAD,barH=(H-PAD*2-40)/(TYPES.length)-14;
+    ctx.fillStyle='rgba(232,159,94,.38)';ctx.font=`.58rem Axiforma,Montserrat,sans-serif`;ctx.textAlign='left';
+    ctx.fillText('SPECTRAL TAXONOMY CLASSIFICATION',PAD,PAD-6);
+    TYPES.forEach(({lbl,score,col},i)=>{
+      const y=PAD+20+i*(barH+14);
+      const pulse=score*(.88+Math.sin(t*1.5+i)*.12);
+      ctx.fillStyle=`rgba(${col},.12)`;ctx.fillRect(PAD,y,GW,barH);
+      ctx.fillStyle=`rgba(${col},.75)`;ctx.fillRect(PAD,y,pulse*GW,barH);
+      ctx.fillStyle=`rgba(${col},.9)`;ctx.font=`600 .6rem Axiforma,Montserrat,sans-serif`;ctx.textAlign='left';
+      ctx.fillText(lbl,PAD+8,y+barH/2+4);
+      ctx.textAlign='right';ctx.fillText(`${(score*100).toFixed(0)}%`,PAD+GW-8,y+barH/2+4);
+    });
+    ctx.fillStyle='rgba(232,159,94,.65)';ctx.font=`600 .72rem Axiforma,Montserrat,sans-serif`;ctx.textAlign='center';
+    ctx.fillText('→  S-type  (silicaceous)',W/2,H-18);
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
+
+// ── CANVAS: ASTEROID 3 — pipeline flow ──
+(function(){
+  const c=document.getElementById('asteroidC3'),ctx=c.getContext('2d');
+  let W,H,t=0;
+  const rsz=()=>{W=c.width=c.offsetWidth;H=c.height=c.offsetHeight;};
+  rsz();window.addEventListener('resize',rsz);
+  const STEPS=['Raw\nPhotometry','Period\nExtraction','3D Shape\nReconstruction','Spectral\nTyping','Full\nCharacterization'];
+  function draw(){
+    t+=.01;ctx.fillStyle='rgba(12,12,19,.9)';ctx.fillRect(0,0,W,H);
+    const boxW=Math.min((W-60)/(STEPS.length)-12,80), boxH=48, cy=H/2;
+    const totalW=(boxW+12)*STEPS.length-12, startX=(W-totalW)/2;
+    STEPS.forEach((lbl,i)=>{
+      const x=startX+i*(boxW+12), pulse=.88+Math.sin(t*1.2+i*.7)*.12;
+      const isLast=i===STEPS.length-1;
+      const alpha=isLast?.92:.55+i*.09;
+      ctx.strokeStyle=`rgba(232,159,94,${alpha*pulse})`;ctx.lineWidth=isLast?1.8:.8;
+      ctx.strokeRect(x,cy-boxH/2,boxW,boxH);
+      if(isLast){ctx.fillStyle=`rgba(232,159,94,.14)`;ctx.fillRect(x,cy-boxH/2,boxW,boxH);}
+      ctx.fillStyle=`rgba(232,159,94,${alpha})`;ctx.font=`${isLast?'600 ':'400 '}.52rem Axiforma,Montserrat,sans-serif`;
+      ctx.textAlign='center';ctx.textBaseline='middle';
+      lbl.split('\n').forEach((ln,li,a)=>ctx.fillText(ln,x+boxW/2,cy+(li-(a.length-1)/2)*14));
+      // Arrow
+      if(i<STEPS.length-1){
+        const ax=x+boxW+2, aw=10;
+        ctx.beginPath();ctx.moveTo(ax,cy);ctx.lineTo(ax+aw-4,cy-4);ctx.lineTo(ax+aw-4,cy+4);ctx.closePath();
+        const flowAlpha=.35+.35*Math.sin(t*2-i*.8);
+        ctx.fillStyle=`rgba(232,159,94,${flowAlpha})`;ctx.fill();
+      }
+    });
+    ctx.fillStyle='rgba(232,159,94,.2)';ctx.font=`bold ${Math.min(W*.055,34)}px Axiforma,Montserrat,sans-serif`;ctx.textAlign='center';ctx.textBaseline='bottom';
+    ctx.fillText('END-TO-END PIPELINE',W/2,H-10);
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
+
+// ── CANVAS: CTA glow ─────────────────────────────
+(function(){
+  const c=document.getElementById('ctaCanvas'),ctx=c.getContext('2d');
+  let W,H,t=0;
+  const rsz=()=>{W=c.width=innerWidth;H=c.height=c.offsetHeight;};
+  rsz();window.addEventListener('resize',rsz);
+  function draw(){t+=.01;ctx.clearRect(0,0,W,H);for(let i=0;i<5;i++){const cx=W*(.1+i*.2),cy=H*.5+Math.sin(t+i)*H*.2,g=ctx.createRadialGradient(cx,cy,0,cx,cy,300);g.addColorStop(0,'rgba(232,159,94,.08)');g.addColorStop(1,'rgba(232,159,94,0)');ctx.fillStyle=g;ctx.fillRect(0,0,W,H);}requestAnimationFrame(draw);}
+  draw();
+})();
+</script>
+</body>
+</html>
